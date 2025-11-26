@@ -42,8 +42,7 @@ export const calculateStreaks = (calendar: Record<string, number>) => {
   );
 
   const lastDay = last(days);
-  const streakExpired = !lastDay || !isEqual(lastDay, startOfDay(Date.now()));
-
+ const streakExpired = !lastDay || (Date.now() - lastDay.getTime() > 2 * 24 * 60 * 60 * 1000);
   return { longestStreak, currentStreak: streakExpired ? 0 : currentStreak };
 };
 
